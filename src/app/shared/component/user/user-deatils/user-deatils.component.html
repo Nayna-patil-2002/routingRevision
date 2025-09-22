@@ -1,0 +1,28 @@
+
+
+  <div class="container">
+  <div class="row">
+    <div class="col-6 offset-3">
+      <div class="card" >
+        <div class="card-body">
+        <div class="row">
+            <div class="col-8">
+                 <h4>{{ userInfo.name }}</h4>  
+               <p>{{ userInfo.email }}</p>
+                <p>{{userInfo.age}}</p>  
+            </div>
+            <div class="col-4">
+                <img [src]="userInfo.image">
+            </div>
+        </div>
+        <button class="btn btn-sm btn-primary mr-2" 
+               routerLink="edituser"
+             >
+          Edit
+          </button>
+        <button class="btn btn-sm btn-danger" (click)="onRemove()">Remove</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
