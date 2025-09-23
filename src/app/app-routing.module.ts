@@ -25,37 +25,65 @@ const routes: Routes = [
  },
  { 
   path: 'user', 
-  component: UserComponent
+  component: UserComponent,
+  children:[
+    {
+      path:'adduser',
+      component:UserFormComponent
+    },
+    {
+      path:":id",
+      component:UserDeatilsComponent
+    },
+    {
+      path:":id/edituser",
+      component:UserFormComponent
+    }
+  ]
  },
  { 
   path: 'product', 
-  component: ProductDashboardComponent
+  component: ProductDashboardComponent,
+  children : [
+    {
+      path : 'addProduct',
+      component : ProductformComponent
+    },
+        {
+      path:":pId",
+      component:ProductCardComponent
+    },
+    {
+      path:":pId/editproduct",
+      component:ProductformComponent
+    },
+  ]
  },
- {
-  path:"product/addProduct",
-  component:ProductformComponent
- },
- {
-  path:"product/:pId",
-  component:ProductCardComponent
- },
- {
-  path:"product/:pId/editproduct",
-  component:ProductformComponent
- },
+//  {
+//   path:"product/addProduct",
+//   component:ProductformComponent
+//  },
+//  {
+//   path:"product/:pId",
+//   component:ProductCardComponent
+//  },
+//  {
+//   path:"product/:pId/editproduct",
+//   component:ProductformComponent
+//  },
  
- {
-  path:"users/adduser",
-  component:UserFormComponent
- },
- {
-  path:"user/:id",
-  component:UserDeatilsComponent
- },
- {
-  path:"user/:id/edituser",
-  component:UserFormComponent
- },
+//  {
+//   path:"users/adduser",
+//   component:UserFormComponent
+//  },
+//  {
+//   path:"user/:id",
+//   component:UserDeatilsComponent
+//  },
+//  {
+//   path:"user/:id/edituser",
+//   component:UserFormComponent
+//  },
  
  
 

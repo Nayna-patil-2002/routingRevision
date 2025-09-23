@@ -1,11 +1,12 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Iproduct } from 'src/app/shared/model/productArr';
 import { Iuser } from 'src/app/shared/model/userArr';
 import { ProductService } from 'src/app/shared/service/product.service';
 import { UserService } from 'src/app/shared/service/user.service';
 import { GetconfirmComponent } from '../../getconfirm/getconfirm.component';
+import { SnackabrService } from 'src/app/shared/service/snackabr.service';
 
 @Component({
   selector: 'app-product-card',
@@ -19,7 +20,8 @@ export class ProductCardComponent implements OnInit {
     private _productservice:ProductService,
     private _activateRoute:ActivatedRoute,
     private _router:Router,
-    private _matDialog : MatDialog
+    private _matDialog : MatDialog,
+    private _snackbar:SnackabrService
   ) { }
 
   ngOnInit(): void {
@@ -29,21 +31,38 @@ export class ProductCardComponent implements OnInit {
   }
 
   getproductDeatils(){
-     console.log(this._activateRoute.snapshot.params['pId'])
-    this.productId=this._activateRoute.snapshot.params['pId']
-    if(this.productId){
-      this._productservice.fetchAllproduct(this.productId)
-       .subscribe({
-        next:(data)=>{
-          this.product=data
-        },
-        error:err=>{
-          console.log(err)
-        }
-       })
+    //  console.log(this._activateRoute.snapshot.params['pId'])
+    // this.productId=this._activateRoute.snapshot.params['pId']
+    // if(this.productId){
+    //   this._productservice.fetchAllproduct(this.productId)
+    //    .subscribe({
+    //     next:(data)=>{
+    //       this.product=data
+    //     },
+    //     error:err=>{
+    //       console.log(err)
+    //     }
+    //    })
 
 
-    }
+    // }
+
+    this._activateRoute.params
+    .subscribe((param : Params) => {
+      this.productId = param['pId'];
+
+      if(this.productId){
+        this._productservice.fetchAllproduct(this.productId)
+        .subscribe({
+          next : data => {
+            this.product = data;
+           
+          },
+          error : err => console.log(err)
+          
+        })
+      }
+    })
   }
 
   onRemove(){
@@ -58,10 +77,11 @@ export class ProductCardComponent implements OnInit {
             if(res){
                 this._productservice.removeproduct(this.product)
                   this._router.navigate(['product'])
+                   this._snackbar.openSnackbar(`This product with ${this.product.productName} is removed successfully.`)
 
             }
            })
-  }
+  } 
 
   //  this._productservice.removeproduct(this.product)
   //    this._router.navigate(['product'])
