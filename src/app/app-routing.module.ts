@@ -2,9 +2,11 @@ import { Component, NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './shared/component/home/home.component';
 import { UserComponent } from './shared/component/user/user.component';
-import { ProductComponent } from './shared/component/product/product.component';
 import { UserFormComponent } from './shared/component/user/user-form/user-form.component';
 import { UserDeatilsComponent } from './shared/component/user/user-deatils/user-deatils.component';
+import { ProductDashboardComponent } from './shared/component/product-dashboard/product-dashboard.component';
+import { ProductCardComponent } from './shared/component/product-dashboard/product-card/product-card.component';
+import { ProductformComponent } from './shared/component/product-dashboard/productform/productform.component';
 
 const routes: Routes = [
   { 
@@ -25,6 +27,23 @@ const routes: Routes = [
   path: 'user', 
   component: UserComponent
  },
+ { 
+  path: 'product', 
+  component: ProductDashboardComponent
+ },
+ {
+  path:"product/addProduct",
+  component:ProductformComponent
+ },
+ {
+  path:"product/:pId",
+  component:ProductCardComponent
+ },
+ {
+  path:"product/:pId/editproduct",
+  component:ProductformComponent
+ },
+ 
  {
   path:"users/adduser",
   component:UserFormComponent
@@ -37,10 +56,7 @@ const routes: Routes = [
   path:"user/:id/edituser",
   component:UserFormComponent
  },
- { 
-  path: 'product', 
-  component: ProductComponent
- },
+ 
  
 
 ];

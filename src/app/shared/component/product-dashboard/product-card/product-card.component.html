@@ -1,0 +1,28 @@
+
+  
+<div class="container mt-5">
+    
+    <div class="row">
+               <div class="col-6 osffset-3">
+            <mat-card>
+                <mat-card-content>
+                   <div class="row">
+                    <div class="col-6">
+                        <strong> {{product.productName}}</strong>
+                       <p>{{product.pStatus}}</p>
+                       <p>{{product.productDetails}}</p>
+                       <p>{{product.price}}</p>
+                    </div>
+                    <div class="col-6">
+                        <img [src]="product.image">
+                    </div>
+                   
+                   </div>
+
+                </mat-card-content>
+                 <button mat-raised-button color="primary" class="mr-2" routerLink="editproduct">Edit</button>
+                 <button mat-raised-button color="warn" (click)="onRemove()">Remove</button>
+            </mat-card>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,39 @@
+<h4>
+    {{isInEdit?'updateUser':"adUser"}}
+</h4>
+
+<div class="container">
+    <div class="row">
+        <div class="col-8 offset-2"> 
+           <div class="card">
+            <div class="card-body">
+                <form [formGroup]="productForm" (ngSubmit)="onAddprod()">
+             <div class="form-group">
+                <label for="productName">Product Name</label>
+                <input class="form-control" id="productName" formControlName="productName" type="text">
+             </div>
+             <div class="form-group">
+                <label for="pStatus">Product Status</label>
+                <input class="form-control" id="pStatus" type="text" formControlName="pStatus">
+             </div>
+              <div class="form-group">
+                <label for="productDetails">Product Deatials</label>
+                <input class="form-control" id="productDetails" type="text" formControlName="productDetails">
+             </div>
+             <div class="form-group">
+                <label for="price">Product Price</label>
+                <input class="form-control" id="price" type="text" formControlName="price">
+             </div>
+              <div class="form-group">
+                <label for="image">Product Image</label>
+                <input class="form-control" id="image" type="text" formControlName="image">
+             </div>
+
+             <button class="btn btn-sm btn-primary" *ngIf="!isInEdit" type="submit">Add product</button>
+             <button class="btn btn-sm btn-primary" *ngIf="isInEdit" type="button" (click)="onUpdate()" >update product</button>
+           </form>
+            </div>
+           </div>
+        </div>
+    </div>
+</div>
