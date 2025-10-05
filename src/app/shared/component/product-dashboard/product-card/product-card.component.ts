@@ -22,11 +22,16 @@ export class ProductCardComponent implements OnInit {
     private _router:Router,
     private _matDialog : MatDialog,
     private _snackbar:SnackabrService
-  ) { }
+  ) { 
+    this._activateRoute.data.subscribe(res=>{
+      console.log(res)
+      this.product=res['product']
+    })
+  }
 
   ngOnInit(): void {
     
-   this.getproductDeatils()
+  //  this.getproductDeatils()
 
   }
 

@@ -6,13 +6,15 @@ import { UuidService } from 'src/app/shared/service/uuid.service';
 import { UserDeatilsComponent } from '../user-deatils/user-deatils.component';
 import { UserService } from 'src/app/shared/service/user.service';
 import { SnackabrService } from 'src/app/shared/service/snackabr.service';
+import { Icandeactivate } from 'src/app/shared/model/candeactivet';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-user-form',
   templateUrl: './user-form.component.html',
   styleUrls: ['./user-form.component.scss']
 })
-export class UserFormComponent implements OnInit {
+export class UserFormComponent implements OnInit, Icandeactivate {
      isInEdit:boolean=false;
      userId!:string
      userForm!:FormGroup
@@ -78,8 +80,18 @@ export class UserFormComponent implements OnInit {
       let updstaeUser={...this.userForm.value, id:this.userId}
       console.log(updstaeUser);
       this._userService.updateUser(updstaeUser)
+      this.isInEdit=false
       this._router.navigate(['user'])
        this._snackbar.openSnackbar(`This user ${updstaeUser.name} updated succesfully.`)
+    }
+  }
+
+  canDeactivate(){
+    if(this.userForm.dirty && this.isInEdit){
+      let getConfirm=confirm('Are you sure want to discard these changes?')
+      return getConfirm
+    }else{
+      return true
     }
   }
 

@@ -1,0 +1,20 @@
+<div class="container mt-5">
+
+  <button mat-raised-button color="primary" routerLink="addAdmin">Add Button</button>
+
+  <div class="row">
+    <div class="col-6">
+      <ul class="list-group">
+        <li class="list-group-item" 
+       [routerLink]="['/admin', admin.id]"
+        *ngFor="let admin of AdminArr">
+          {{ admin.name }}
+        </li>
+      </ul>
+    </div>
+    <div class="col-6">
+        <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>
+

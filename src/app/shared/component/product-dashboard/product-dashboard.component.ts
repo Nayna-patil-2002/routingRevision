@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { ProductService } from '../../service/product.service';
 import { Iproduct } from '../../model/productArr';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-product-dashboard',
@@ -11,11 +12,15 @@ import { Iproduct } from '../../model/productArr';
 export class ProductDashboardComponent implements OnInit {
    productArr:Array<Iproduct>=[]
   constructor(
-    private _productService:ProductService
-  ) { }
+    private _productService:ProductService,
+    private _router:ActivatedRoute
+  ) { 
+    console.log(this._router)
+    this.productArr=this._router.snapshot.data['product']
+  }
 
   ngOnInit(): void {
-    this.getproduct()
+    // this.getproduct()
   }
 
   getproduct(){

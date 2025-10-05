@@ -1,0 +1,76 @@
+
+
+<main>
+  <!-- Login -->
+  <ng-container *ngIf="!allReadyHasAc">
+    <div class="card">
+      <div class="card-body">
+        <h4>Login</h4>
+        <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input
+              type="text"
+              formControlName="email"
+              id="email"
+              class="form-control"
+            />
+          </div>
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input
+              type="password"
+              formControlName="password"
+              id="password"
+              class="form-control"
+            />
+          </div>
+          <button mat-raised-button color="primary">Login</button>
+          <a href="javascript:;" (click)="allReadyHasAc = true">
+            Don't Have Account? Sign Up
+          </a>
+        </form>
+      </div>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="allReadyHasAc">
+        <div class="card">
+            <div class="card-body">
+                 <h4>SignUp</h4>
+                 <form [formGroup]=" signUpForm" (ngSubmit)="signUp()">
+                      <div class="form-group">
+            <label for="email">Email</label>
+            <input
+              type="text"
+              formControlName="email"
+              id="email"
+              class="form-control"
+            />
+          </div>
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input
+              type="password"
+              formControlName="password"
+              id="password"
+              class="form-control"
+            />
+          </div>
+          <div class="form-group">
+            <label for="userRole">User Role</label>
+            <select class="form-control" formControlName="userRole" id="userRole">
+                <option value="admin">Admin</option>
+                <option value="superAdmin">SuperAdmin</option>
+                <option value="buyer">Buyer</option>
+            </select>
+          </div>
+          <button mat-raised-button color="primary">Sign Up</button>
+                 </form>
+            </div>
+            <a href="javascript:;" (click)="allReadyHasAc = false">
+                All Ready Has Account?
+            </a>
+        </div>
+    </ng-container>
+</main>
+

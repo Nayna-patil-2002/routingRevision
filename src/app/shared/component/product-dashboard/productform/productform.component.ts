@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Route, Router } from '@angular/router';
+import { Icandeactivate } from 'src/app/shared/model/candeactivet';
 import { Iproduct } from 'src/app/shared/model/productArr';
 import { ProductService } from 'src/app/shared/service/product.service';
 import { SnackabrService } from 'src/app/shared/service/snackabr.service';
@@ -11,7 +12,7 @@ import { UuidService } from 'src/app/shared/service/uuid.service';
   templateUrl: './productform.component.html',
   styleUrls: ['./productform.component.scss']
 })
-export class ProductformComponent implements OnInit {
+export class ProductformComponent implements OnInit, Icandeactivate {
   isInEdit:boolean=false;
   productId!:string;
   productForm!:FormGroup;
@@ -74,8 +75,18 @@ export class ProductformComponent implements OnInit {
       let updateObj={...this.productForm.value, pId:this.productId}
        console.log(updateObj)
        this._productSrrvice.updateproduct(updateObj)
+        this.isInEdit=false
        this._router.navigate(['product'])
        this._snackabr.openSnackbar(`This ${updateObj.productName} is updated successfully.`)
+    }
+  }
+
+  canDeactivate(){
+    if(this.productForm.dirty && this.isInEdit){
+      let getConfirm=confirm('Are you sure discard the changes?')
+      return getConfirm
+    }else{
+      return true
     }
   }
 

@@ -7,25 +7,61 @@ import { UserDeatilsComponent } from './shared/component/user/user-deatils/user-
 import { ProductDashboardComponent } from './shared/component/product-dashboard/product-dashboard.component';
 import { ProductCardComponent } from './shared/component/product-dashboard/product-card/product-card.component';
 import { ProductformComponent } from './shared/component/product-dashboard/productform/productform.component';
+import { AdminComponent } from './shared/component/admin/admin.component';
+import { AdminFormComponent } from './shared/component/admin/admin-form/admin-form.component';
+import { AdmincardComponent } from './shared/component/admin/admincard/admincard.component';
+import { AuthComponent } from './shared/component/auth/auth.component';
+import { AuthGuard } from './shared/service/auth.gaurd';
+import { PageNotFoundComponent } from './shared/component/page-not-found/page-not-found.component';
+import { UserRoleGuard } from './shared/service/user-role.guard';
+import { CanDeactivateGuard } from './shared/service/can-deactivate.guard';
+import { ProductresolverResolver } from './shared/service/productresolver.resolver';
+import { ProductDeatilaresolverResolver } from './shared/service/product-deatilaresolver.resolver';
 
 const routes: Routes = [
-  { 
-  path: ' ', 
-  component: HomeComponent
+//   { 
+//   path: '', 
+//   component: AuthComponent,
+    
+//  },
+//  {
+//   path:"page-not-found",
+//   component:PageNotFoundComponent,
+//   data:{
+//     msg:`page not found msg using static data!!`
+//   }
+//  },
+//  {
+//   path:'**',
+//   redirectTo:`page-not-found`
+//  },
+  // { 
+  //   path: '', 
+  //   redirectTo: 'home',
+  //    pathMatch: 'full' 
+  //   },
+
+   { 
+  path: '', 
+  component: AuthComponent,
+  //  pathMatch:'full' 
  },
-  { 
-    path: '', 
-    redirectTo: 'home',
-     pathMatch: 'full' 
-    },
 
  { 
   path: 'home', 
-  component: HomeComponent
+  component: HomeComponent,
+   data:{
+    userRoles:['admin', "superAdmin", "buyer"]
+   }
  },
  { 
   path: 'user', 
   component: UserComponent,
+   canActivate:[AuthGuard, UserRoleGuard],
+   
+   data:{
+    userRoles:["admin", "superAdmin"]
+   },
   children:[
     {
       path:'adduser',
@@ -37,13 +73,21 @@ const routes: Routes = [
     },
     {
       path:":id/edituser",
-      component:UserFormComponent
+      component:UserFormComponent,
+      canDeactivate:[CanDeactivateGuard],
     }
   ]
  },
  { 
   path: 'product', 
   component: ProductDashboardComponent,
+  canActivate:[AuthGuard, UserRoleGuard],
+   data:{
+    userRoles:["admin", "superAdmin", "buyer"]
+   },
+   resolve:{
+    product:ProductresolverResolver
+   },
   children : [
     {
       path : 'addProduct',
@@ -51,12 +95,17 @@ const routes: Routes = [
     },
         {
       path:":pId",
-      component:ProductCardComponent
+      component:ProductCardComponent,
+      resolve:{
+        product:ProductDeatilaresolverResolver
+      }
     },
     {
       path:":pId/editproduct",
-      component:ProductformComponent
+      component:ProductformComponent,
+      canDeactivate:[CanDeactivateGuard]
     },
+
   ]
  },
 //  {
@@ -85,7 +134,28 @@ const routes: Routes = [
 //   component:UserFormComponent
 //  },
  
- 
+  {
+    path:"admin",
+    component:AdminComponent,
+     canActivate:[AuthGuard, UserRoleGuard],
+    data:{
+      userRoles:[ "superAdmin"]
+   },
+    children:[
+      {
+        path:"addAdmin",
+        component:AdminFormComponent
+      },
+      {
+        path:":id",
+        component:AdmincardComponent
+      },
+      {
+        path:':id/editAdmin',
+        component:AdminFormComponent
+      }
+    ]
+  }
 
 ];
 

@@ -18,6 +18,15 @@ import { ProductDashboardComponent } from './shared/component/product-dashboard/
 import { ProductCardComponent } from './shared/component/product-dashboard/product-card/product-card.component';
 import { ProductformComponent } from './shared/component/product-dashboard/productform/productform.component';
 import { GetconfirmComponent } from './shared/component/getconfirm/getconfirm.component';
+import { CricketerComponent } from './shared/component/cricketer/cricketer.component';
+import { CricketerCardComponent } from './shared/component/cricketer/cricketer-card/cricketer-card.component';
+import { CrickterFormComponent } from './shared/component/cricketer/crickter-form/crickter-form.component';
+import { AdminComponent } from './shared/component/admin/admin.component';
+import { AdmincardComponent } from './shared/component/admin/admincard/admincard.component';
+import { AdminFormComponent } from './shared/component/admin/admin-form/admin-form.component';
+import { AuthComponent } from './shared/component/auth/auth.component';
+import { HttpClientModule } from '@angular/common/http';
+import { PageNotFoundComponent } from './shared/component/page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +42,14 @@ import { GetconfirmComponent } from './shared/component/getconfirm/getconfirm.co
         ProductCardComponent,
         ProductformComponent,
         GetconfirmComponent,
+        CricketerComponent,
+        CricketerCardComponent,
+        CrickterFormComponent,
+        AdminComponent,
+        AdmincardComponent,
+        AdminFormComponent,
+        AuthComponent,
+        PageNotFoundComponent,
    
   ],
   imports: [
@@ -41,7 +58,8 @@ import { GetconfirmComponent } from './shared/component/getconfirm/getconfirm.co
     MaterialModule,
     ReactiveFormsModule,
      BrowserAnimationsModule,
-    
+    HttpClientModule,
+    ReactiveFormsModule
      ],
   providers: [],
   bootstrap: [AppComponent]

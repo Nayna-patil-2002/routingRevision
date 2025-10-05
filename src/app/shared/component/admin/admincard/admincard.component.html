@@ -1,0 +1,27 @@
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <mat-card>
+    <mat-card-content>
+    
+        <div class="row">
+            <div class="col-8">
+            <h4>{{adminDetails.name}}</h4> 
+            <p>{{adminDetails.email}}</p>
+           <p>{{adminDetails.contact}}</p>
+          <p>{{adminDetails.role}}</p>
+        </div>
+        <div class="col-4">
+            <img [src]="adminDetails.image" >
+        </div>
+        </div>
+        <button mat-raised-button color="primary" class="mr-2" routerLink="editAdmin">Edit</button>
+        <button mat-raised-button color="warn" (click)="onRemove()">Remove</button>
+    
+    </mat-card-content>
+</mat-card>
+        </div>
+    </div>
+</div>
